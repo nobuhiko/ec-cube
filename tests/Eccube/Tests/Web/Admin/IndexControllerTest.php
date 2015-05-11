@@ -1,8 +1,8 @@
-<!--{*
+<?php
 /*
  * This file is part of EC-CUBE
  *
- * Copyright(c) 2000-2014 LOCKON CO.,LTD. All Rights Reserved.
+ * Copyright(c) 2000-2015 LOCKON CO.,LTD. All Rights Reserved.
  *
  * http://www.lockon.co.jp/
  *
@@ -20,9 +20,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-*}-->
+namespace Eccube\Tests\Web\Admin;
 
-<ul class="level1">
-<li<!--{if $tpl_subno == 'index'}--> class="on"<!--{/if}--> id="navi-customer-index"><a href="<!--{$smarty.const.ROOT_URLPATH}--><!--{$smarty.const.ADMIN_DIR}-->customer/<!--{$smarty.const.DIR_INDEX_PATH}-->"><span>会員マスター</span></a></li>
-<li<!--{if $tpl_subno == 'customer'}--> class="on"<!--{/if}--> id="navi-customer-customer"><a href="<!--{$smarty.const.ROOT_URLPATH}--><!--{$smarty.const.ADMIN_DIR}-->customer/edit"><span>会員登録</span></a></li>
-</ul>
+use Eccube\Tests\Web\Admin\AbstractAdminWebTestCase;
+
+class IndexControllerTest extends AbstractAdminWebTestCase
+{
+
+    public function testRoutingAdminIndex()
+    {
+        $this->client->request('GET', $this->app['url_generator']->generate('admin_homepage'));
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+    }
+
+}
