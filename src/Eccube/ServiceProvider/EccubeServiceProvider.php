@@ -259,16 +259,8 @@ class EccubeServiceProvider implements ServiceProviderInterface
             $types[] = new \Eccube\Form\Type\FaxType(); // 削除予定
             $types[] = new \Eccube\Form\Type\ZipType($app['config']);
             $types[] = new \Eccube\Form\Type\AddressType($app['config']);
-            $types[] = new \Eccube\Form\Type\PaymentType();
-            $types[] = new \Eccube\Form\Type\DeliveryType();
-            $types[] = new \Eccube\Form\Type\DeliveryDateType();
             $types[] = new \Eccube\Form\Type\DeliveryFeeType();
             $types[] = new \Eccube\Form\Type\DeliveryTimeType();
-            $types[] = new \Eccube\Form\Type\ProductTypeType();
-            $types[] = new \Eccube\Form\Type\PaymentRegisterType();
-            $types[] = new \Eccube\Form\Type\MailType();
-            $types[] = new \Eccube\Form\Type\MailTemplateType();
-            $types[] = new \Eccube\Form\Type\CategoryType();
 
             $types[] = new \Eccube\Form\Type\MasterType();
             $types[] = new \Eccube\Form\Type\Master\JobType();
@@ -283,6 +275,12 @@ class EccubeServiceProvider implements ServiceProviderInterface
             $types[] = new \Eccube\Form\Type\Master\ProductListOrderByType();
             $types[] = new \Eccube\Form\Type\Master\PageMaxType();
             $types[] = new \Eccube\Form\Type\Master\CsvType();
+
+            $types[] = new \Eccube\Form\Type\Master\DeliveryDateType();
+            $types[] = new \Eccube\Form\Type\Master\PaymentType();
+            $types[] = new \Eccube\Form\Type\Master\MailTemplateType();
+            $types[] = new \Eccube\Form\Type\Master\CategoryType();
+
             $types[] = new \Eccube\Form\Type\CustomerType($app); // 削除予定
 
             if (isset($app['security']) && isset($app['eccube.repository.customer_favorite_product'])) {
@@ -290,14 +288,10 @@ class EccubeServiceProvider implements ServiceProviderInterface
             }
             $types[] = new \Eccube\Form\Type\SearchProductType();
             $types[] = new \Eccube\Form\Type\CustomerLoginType($app['session']);
-            $types[] = new \Eccube\Form\Type\TaxRuleType();
-            $types[] = new \Eccube\Form\Type\MainEditType($app);
-            $types[] = new \Eccube\Form\Type\BlockType($app);
-            $types[] = new \Eccube\Form\Type\OrderSearchType($app);
+            $types[] = new \Eccube\Form\Type\OrderSearchType($app); // 使われていないので削除予定
             $types[] = new \Eccube\Form\Type\ShoppingType($app);
             $types[] = new \Eccube\Form\Type\ShippingMultiType($app);
             $types[] = new \Eccube\Form\Type\ShipmentItemType();
-            $types[] = new \Eccube\Form\Type\CustomerAgreementType($app);
             $types[] = new \Eccube\Form\Type\ForgotType();
 
             // front
@@ -329,6 +323,13 @@ class EccubeServiceProvider implements ServiceProviderInterface
             $types[] = new \Eccube\Form\Type\Admin\OrderType($app);
             $types[] = new \Eccube\Form\Type\Admin\OrderDetailType($app);
             $types[] = new \Eccube\Form\Type\Admin\ShippingType($app);
+            $types[] = new \Eccube\Form\Type\Admin\PaymentRegisterType();
+            $types[] = new \Eccube\Form\Type\Admin\TaxRuleType();
+            $types[] = new \Eccube\Form\Type\Admin\MainEditType($app);
+            $types[] = new \Eccube\Form\Type\Admin\MailType();
+            $types[] = new \Eccube\Form\Type\Admin\CustomerAgreementType($app);
+            $types[] = new \Eccube\Form\Type\Admin\BlockType($app);
+            $types[] = new \Eccube\Form\Type\Admin\DeliveryType();
 
             $types[] = new \Eccube\Form\Type\Admin\PluginLocalInstallType();
             $types[] = new \Eccube\Form\Type\Admin\PluginManagementType();
