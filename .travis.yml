@@ -4,13 +4,13 @@ git:
   submodules: false
 
 language: php
-sudo: required
+sudo: false
 php:
-    #- 5.3.3
-  - #- 5.3
-  - #- 5.4
-  - #- 5.5
-  - 5.6
+   #- 5.3.3
+   #- 5.3
+   - 5.4
+    # - 5.5
+    #- 5.6
     #- hhvm
     #- 7.0
 
@@ -26,7 +26,7 @@ php:
 
 env:
   - DB=mysql USER=root DBNAME=myapp_test DBPASS=' ' DBUSER=root
-  - DB=pgsql USER=postgres DBNAME=myapp_test DBPASS=password DBUSER=postgres
+    #- DB=pgsql USER=postgres DBNAME=myapp_test DBPASS=password DBUSER=postgres
 
 before_script:
   - composer self-update || true
