@@ -1,25 +1,25 @@
 # circle.yml
 machine:
-    php:
-        version: 5.6.2
+  php:
+    version: 5.6.5
+    timezone: Asia/Tokyo
 
-    environment:
-        DB=mysql 
-        USER=ubuntu
-        DBNAME=circle_test
-        DBPASS=$(printf '') 
-        DBUSER=ubuntu
+environment:
+  DB=mysql 
+  USER=ubuntu
+  DBNAME=circle_test
+  DBPASS=$(printf ' ') 
+  DBUSER=ubuntu
 
 dependencies:
-    pre:
-        - echo "memory_limit = 128M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
-        - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
+  pre:
+    - echo "memory_limit = 256M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+    - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
 
-    override:
-        - composer install --prefer-source --no-interaction
-        - sh ./eccube_install.sh mysql none
-        - mkdir reports/
+  override:
+    - composer install --prefer-source --no-interaction
+    - sh ./eccube_install.sh mysql none
 
 test:
-    override:
-        - ./vendor/bin/phpunit --coverage-html=reports/
+  override:
+    - ./vendor/bin/phpunit --coverage-html=$CIRCLE_ARTIFACTS
