@@ -3,24 +3,23 @@ machine:
     php:
         version: 5.6.2
 
-    services:
-        - mysql
-
     environment:
         DB=mysql 
         USER=ubuntu
         DBNAME=circle_test
-        DBPASS=' ' 
+        DBPASS=$(printf '') 
         DBUSER=ubuntu
 
 dependencies:
+    pre:
+        - echo "memory_limit = 128M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+        - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
+
     override:
         - composer install --prefer-source --no-interaction
         - sh ./eccube_install.sh mysql none
-
-    cache_directories:
-        - "vendor"   # relative to the build directory
+        - mkdir reports/
 
 test:
     override:
-        - ./vendor/bin/phpunit
+        - ./vendor/bin/phpunit --coverage-html=reports/
